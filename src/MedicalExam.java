@@ -1,0 +1,13 @@
+
+import java.util.Date;
+
+public class MedicalExam extends Service {
+
+	private String typology;
+
+	public void MedicalExam(Date dh, double c, String t) {
+            super.Service(dh, c);
+            this.typology = t;
+	}
+
+}
