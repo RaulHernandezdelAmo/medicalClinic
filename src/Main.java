@@ -30,6 +30,8 @@ public class Main {
         cl.assignServicePatient(2, 2);
         cl.assignServicePatient(3, 1);
         cl.assignServicePatient(3, 0);
+        
+        System.out.println(cl.calculateReceivedAmount());
     }
     
 }
