@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.TreeMap;
@@ -8,7 +9,7 @@ public class Clinic {
     
     private TreeMap<Integer, Service> services = new TreeMap<>();    
     private TreeMap<Integer, Patient> patients = new TreeMap<>();
-    private LinkedHashMap<Integer, Integer> clients = new LinkedHashMap<>();
+    private LinkedHashMap<Integer, ArrayList> clients = new LinkedHashMap<>();
 
     public void Clinic() {
         services = new TreeMap<>();
@@ -64,8 +65,15 @@ public class Clinic {
     }
 
     public void assignServicePatient(int numID, int cod) {
-        
-        clients.put(numID, cod);
+        if(clients.containsKey(numID)){
+            ArrayList<Integer> clientServices = new ArrayList<>(clients.get(numID));
+            clientServices.add(cod);
+            clients.put(numID, clientServices);
+        }else{
+            ArrayList<Integer> clientServices = new ArrayList<>();
+            clientServices.add(cod);
+            clients.put(numID, clientServices);
+        }
         System.out.println(clients);
     }
 
