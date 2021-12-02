@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 import java.util.Date;
+import static java.util.Formatter.BigDecimalLayoutForm.values;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
@@ -78,7 +80,15 @@ public class Clinic {
     }
 
     public double calculateReceivedAmount() {
-            return 0;
+        double total = 0;
+        for (int key:clients.keySet()){
+            ArrayList value = clients.get(key);
+            Iterator<Integer> it = value.iterator();
+            while(it.hasNext()){
+                total += services.get(it.next()).getCost();
+            }
+        }
+        return Math.round(total * 100.0) / 100.0;
     }
 
 }
