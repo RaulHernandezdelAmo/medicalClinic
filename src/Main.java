@@ -18,11 +18,15 @@ public class Main {
         cl.addPatient("Marta");
         cl.addPatient("Andrea");
         
+        System.out.println(cl.patientsToString());
+        
         cl.addConsultation(new Date(), 200.5, "Head ache");
         cl.addConsultation(new Date(), 10.89, "Cold");
         cl.addMedicalExam(new Date(), 89.4, "Clinical Analyses");
         cl.addMedicalExam(new Date(), 506.7, "Imaging");
         cl.addMedicalExam(new Date(), 108.59, "Check-up");
+        
+        System.out.println(cl.servicesToString());
         
         
         cl.assignServicePatient(0, 4);
@@ -30,6 +34,8 @@ public class Main {
         cl.assignServicePatient(2, 2);
         cl.assignServicePatient(3, 1);
         cl.assignServicePatient(3, 0);
+        
+        System.out.println(cl.clientsToString());
         
         System.out.println(cl.calculateReceivedAmount());
     }
