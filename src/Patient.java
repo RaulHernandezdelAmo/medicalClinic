@@ -1,11 +1,17 @@
+
+import java.util.LinkedHashSet;
+
 public class Patient {
 
+        private static int count = 0;
 	private int numID;
-
 	private String name;
+        
 
-	public void Patient(String n) {
 
+	public Patient(String n) {
+            this.name = n;
+            this.numID = count++;
 	}
 
 	public int getNumID() {
