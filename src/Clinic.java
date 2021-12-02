@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.Date;
-import static java.util.Formatter.BigDecimalLayoutForm.values;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.TreeMap;
@@ -46,7 +45,6 @@ public class Clinic {
     public boolean addMedicalExam(Date dh, double c, String t) {
         MedicalExam me = new MedicalExam(dh, c, t);
         services.put(me.getCod(), me);
-        System.out.println(services);
         if(services.containsKey(me.getCod())){
             return true;
         }else{
@@ -76,11 +74,10 @@ public class Clinic {
             clientServices.add(cod);
             clients.put(numID, clientServices);
         }
-        System.out.println(clients);
     }
 
     public double calculateReceivedAmount() {
-        double total = 0;
+        double total = 0.0;
         for (int key:clients.keySet()){
             ArrayList value = clients.get(key);
             Iterator<Integer> it = value.iterator();
@@ -89,6 +86,41 @@ public class Clinic {
             }
         }
         return Math.round(total * 100.0) / 100.0;
+    }
+    
+    public String patientsToString(){  
+        String returnString = "";
+        if(patients.isEmpty() == false){
+            for(int key:patients.keySet()){
+                returnString += "\n" +patients.get(key).toString();
+            }
+        }
+        return returnString;
+    }
+    
+    public String servicesToString(){  
+        String returnString = "";
+        if(services.isEmpty() == false){
+            for(int key:services.keySet()){
+                returnString += "\n" +services.get(key).toString();
+            }
+        }
+        return returnString;
+    }
+    
+    public String clientsToString(){  
+        String returnString = "";
+        if(clients.isEmpty() == false){
+            for(int key:clients.keySet()){
+                returnString += "\n" +patients.get(key).toString();
+                ArrayList value = clients.get(key);
+                Iterator<Integer> it = value.iterator();
+                while(it.hasNext()){
+                    returnString += "\n                      " +services.get(it.next()).toString();
+                }
+            }
+        }
+        return returnString+"\n";
     }
 
 }

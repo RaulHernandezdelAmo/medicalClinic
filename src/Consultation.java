@@ -12,5 +12,10 @@ public class Consultation extends Service {
     public void setDiagnostic(String d) {//Check the uml bc it says one is string and the other is int ??
             this.diagnosis = d;
     }
+    
+    @Override
+    public String toString(){
+        return super.toString() + " diagnosis: " + diagnosis;
+    }
 }
     
