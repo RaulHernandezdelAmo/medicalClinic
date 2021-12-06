@@ -7,17 +7,25 @@ import java.util.TreeMap;
 
 public class Clinic {
     
-    
-    private TreeMap<Integer, Service> services = new TreeMap<>();    
-    private TreeMap<Integer, Patient> patients = new TreeMap<>();
-    private LinkedHashMap<Integer, ArrayList> clients = new LinkedHashMap<>();
+    private TreeMap<Integer, Service> services = new TreeMap<>(); //TreeMap that relates an ID with its Service   
+    private TreeMap<Integer, Patient> patients = new TreeMap<>(); //TreeMap that relates an ID with its Patient 
+    private LinkedHashMap<Integer, ArrayList> clients = new LinkedHashMap<>(); //TreeMap that relates the ID of a patient with the IDs of its services (Relation 1..n)
 
+    /**
+     * Constructor for Clinic class
+     */
     public void Clinic() {
         services = new TreeMap<>();
         patients = new TreeMap<>();
         clients = new LinkedHashMap<>();
     }
 
+    /**
+     * method for adding a patient
+     * 
+     * @param n name of the patient
+     * @return boolean true if creation was done, false if not
+     */
     public boolean addPatient(String n) {
         
         Patient p = new Patient(n);
@@ -41,7 +49,14 @@ public class Clinic {
     }
     */
     
-    
+    /**
+     * method for adding a medical exam to the services
+     * 
+     * @param dh datahour of the medical exam
+     * @param c cost of the medical exam
+     * @param t tipology of the medical exam
+     * @return boolean true if creation was done, false if not
+     */
     public boolean addMedicalExam(Date dh, double c, String t) {
         MedicalExam me = new MedicalExam(dh, c, t);
         services.put(me.getCod(), me);
@@ -52,7 +67,14 @@ public class Clinic {
         }
     }
     
-    
+    /**
+     * method for adding a consultation to the services
+     * 
+     * @param dh datahour of the medical exam
+     * @param c cost of the medical exam
+     * @param d diagnosis of the consultation
+     * @return boolean true if creation was done, false if not
+     */
     public boolean addConsultation(Date dh, double c, String d) {
         Consultation con = new Consultation(dh, c);
         con.setDiagnostic(d);
@@ -63,7 +85,13 @@ public class Clinic {
             return false;
         }
     }
-
+    
+    /**
+     * method for relating a service to a patient
+     * 
+     * @param numID id of the patient
+     * @param cod id of the service
+     */
     public void assignServicePatient(int numID, int cod) {
         if(clients.containsKey(numID)){
             ArrayList<Integer> clientServices = new ArrayList<>(clients.get(numID));
@@ -75,7 +103,12 @@ public class Clinic {
             clients.put(numID, clientServices);
         }
     }
-
+    
+    /**
+     * method to calculate the total amount of money from the services
+     * 
+     * @return double 0.0 if no services, the summ of all the cost if not
+     */
     public double calculateReceivedAmount() {
         double total = 0.0;
         for (int key:clients.keySet()){
@@ -88,6 +121,11 @@ public class Clinic {
         return Math.round(total * 100.0) / 100.0;
     }
     
+    /**
+     * method not included in the original uml, but useful to print the patients
+     * 
+     * @return String with the patients
+     */
     public String patientsToString(){  
         String returnString = "";
         if(patients.isEmpty() == false){
@@ -98,6 +136,11 @@ public class Clinic {
         return returnString;
     }
     
+     /**
+     * method not included in the original uml, but useful to print the services
+     * 
+     * @return String with the services
+     */
     public String servicesToString(){  
         String returnString = "";
         if(services.isEmpty() == false){
@@ -108,6 +151,11 @@ public class Clinic {
         return returnString;
     }
     
+    /**
+     * method not included in the original uml, but useful to print the relations of patients and services
+     * 
+     * @return String with the patients and their services
+     */
     public String clientsToString(){  
         String returnString = "";
         if(clients.isEmpty() == false){
