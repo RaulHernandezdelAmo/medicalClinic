@@ -36,18 +36,6 @@ public class Clinic {
             return false;
         }
     }
-
-    /*
-    public boolean addService(Date dh, double c) {
-        Service s = new Service(dh, c);
-        s.services.add(s);
-        if(s.services.contains(s)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    */
     
     /**
      * method for adding a medical exam to the services
@@ -76,6 +64,8 @@ public class Clinic {
      * @return boolean true if creation was done, false if not
      */
     public boolean addConsultation(Date dh, double c, String d) {
+        
+        //Although in the UML this doesnt require a d String as parameter, I added becasue if not we do not assign the diagnosis anywhere
         Consultation con = new Consultation(dh, c);
         con.setDiagnostic(d);
         services.put(con.getCod(), con);
@@ -92,7 +82,7 @@ public class Clinic {
      * @param numID id of the patient
      * @param cod id of the service
      */
-    public void assignServicePatient(int numID, int cod) {
+    public boolean assignServicePatient(int numID, int cod) {
         if(clients.containsKey(numID)){
             ArrayList<Integer> clientServices = new ArrayList<>(clients.get(numID));
             clientServices.add(cod);
@@ -101,6 +91,11 @@ public class Clinic {
             ArrayList<Integer> clientServices = new ArrayList<>();
             clientServices.add(cod);
             clients.put(numID, clientServices);
+        }
+        if(clients.containsKey(numID) && clients.get(numID).contains(cod)){
+            return true;
+        }else{
+            return false;
         }
     }
     

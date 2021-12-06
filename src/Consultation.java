@@ -19,7 +19,7 @@ public class Consultation extends Service {
      * Setter of diagnosis
      * @param d  String diagnosis
      */
-    public void setDiagnostic(String d) {//Check the uml bc it says one is string and the other is int ??
+    public void setDiagnostic(String d) {
             this.diagnosis = d;
     }
     
